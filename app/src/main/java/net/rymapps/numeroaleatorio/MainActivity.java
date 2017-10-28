@@ -12,6 +12,9 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdView;
+
 import java.util.Random;
 
 public class MainActivity extends AppCompatActivity {
@@ -23,6 +26,8 @@ public class MainActivity extends AppCompatActivity {
     private int numJugador;
     private int puntosYo;
     private int puntosAndroid;
+
+    private AdView mAdView; //Admob
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +42,11 @@ public class MainActivity extends AppCompatActivity {
 
         puntosYo = 0;
         puntosAndroid = 0;
+
+        /*Cargar Admob*/
+        mAdView = (AdView) findViewById(R.id.adView);
+        AdRequest adRequest = new AdRequest.Builder().build();
+        mAdView.loadAd(adRequest);
     }
 
     public void clic_boton(View v) {
@@ -97,6 +107,7 @@ public class MainActivity extends AppCompatActivity {
                 lblPuntosYo.setText(String.valueOf(puntosYo));
                 lblPuntosAndroid.setText(String.valueOf(puntosAndroid));
                 lblMensaje.setText("-");
+                Toast.makeText(MainActivity.this, "Puntos reiniciados", Toast.LENGTH_SHORT).show();
             }
         });
         dialogo.setNegativeButton("No", null);
